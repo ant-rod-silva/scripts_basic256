@@ -1,0 +1,25 @@
+# Checks if a word is a palindrome
+# Author: Antonio Rodrigo dos Santos Silva (2018)
+# Inputs to test: bob, ana, 1991...
+
+subroutine palindrome(txt)
+    revTxt = ""
+    txt =  lower(txt)
+    txt_length$ = length(txt)
+
+    FOR x$ = txt_length$ TO 1 STEP -1
+        revTxt = revTxt + mid(txt, x$, 1)
+    NEXT x$
+    PRINT "Reverse Word: "; revTxt
+
+    IF txt = revTxt THEN
+         PRINT "The Word Is A Palindrome"
+    ELSE
+        PRINT "The Word Is Not A Palindrome"
+    END IF
+end subroutine
+
+# start app
+cls
+input "Enter word: ", input_txt
+call palindrome(input_txt)
