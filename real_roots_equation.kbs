@@ -1,0 +1,33 @@
+# Write a program to compute the real roots of a equation AX2+BX+C=0
+# Author: Antonio Rodrigo dos Santos Silva (2018)
+# tests:
+# x² - 5x + 6 = 0      ->   delta: 1 | x1: 3 | x2: 2
+# 4x² - 4x + 1 = 0    ->   delta: 0 | x: 0,5
+# x² - 4x + 5 = 0      ->   delta: -4 | There's no real roots for this equation
+
+subroutine roots_eq(a$, b$, c$)
+    delta = (b$^2) - 4*a$*c$
+    print "delta: ";delta
+    
+    if delta > 0 then
+        x1 = (-b$ + sqr(delta)) / (2*a$)
+        x2 = (-b$ - sqr(delta)) / (2*a$)
+        print "x1: ";x1
+        print "x2: ";x2
+    end if
+    if delta = 0 then
+        x = (-b$ + sqr(delta)) / (2*a$)
+        print "x: ";x
+    end if
+    if delta < 0 then
+        print "There's no real roots for this equation"
+    end if
+end subroutine
+
+# start app
+cls
+input "Enter a: ", input_a$
+input "Enter b: ", input_b$
+input "Enter c: ", input_c$
+
+call roots_eq(input_a$, input_b$, input_c$)
