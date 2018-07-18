@@ -1,0 +1,17 @@
+# Write a program to sum 1 + 1.5 + 2 + 2.5 + 3 + 3.5 + .... + n , where n is any positive integer.
+# Author: Antonio Rodrigo dos Santos Silva (2018)
+
+subroutine seq(n$)
+    if n$ >= 1 then
+        for x$ = 1 to n$ step 0.5
+            print x$
+        next x$
+    else
+        print "Invalid length"
+    end if
+end subroutine
+
+# start app
+cls
+input "Enter the sequence length (integer): ", input_n$
+call seq(input_n$)
