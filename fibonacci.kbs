@@ -1,0 +1,23 @@
+# Fibonacci sequence
+# Author: Antonio Rodrigo dos Santos Silva (2018)
+
+subroutine fib(n$)
+    n1$ = 1
+    n2$ = 1
+    print n1$
+    print n2$
+
+    # every number after the first two is the sum of the two preceding ones:
+    if n$ >=3 then
+        for x$ = 3 to n$
+            n3$ = n1$ + n2$
+            print n3$
+            n1$ = n2$
+            n2$ = n3$
+        next x$
+    end if
+end subroutine
+
+# start app
+cls
+call fib(6)
