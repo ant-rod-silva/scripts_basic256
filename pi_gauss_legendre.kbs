@@ -1,0 +1,29 @@
+# Gauss-Legendre Algorithm to Pi Estimation
+# By Antonio Rodrigo dos Santos Silva (2018)
+#
+# App based in Dr. G.H. George source code (thanks) - Faculty of Engineering and Applied Science 
+# https://www.engr.mun.ca/~ggeorge/programs/salamin.bas
+# see-also: https://pt.wikipedia.org/wiki/Algoritmo_de_Gauss-Legendre
+
+subroutine pi_gen(n$)
+    a = 1
+    b = 1 / SQR(2)
+    t = 1 / 4
+    p = 1
+    
+    PRINT "Iteration  -  Estimate of Pi"
+
+    FOR i$ = 1 TO n$
+        a_temp = a
+        a = (a_temp + b) / 2
+        b = SQR(a_temp * b)
+        t = t - p * (a - a_temp) * (a - a_temp)
+        x = 2 * p
+        print i$; "  -  "; (a + b) * (a + b) / (4 * t)
+    NEXT i$
+end subroutine
+
+# main
+CLS
+call pi_gen(8)
+END
