@@ -1,0 +1,25 @@
+#  program ito nput any number and find out greatest and lowest digit
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# Input a temperature (in farenheit): 100 | Celsius: 37,7777777778
+
+
+function faren_to_celsius(f)
+   return (f - 32) * (5 / 9)
+end function
+
+function celsius_to_faren(c)
+   return c * (9 / 5) + 32
+end function
+
+
+# main
+cls
+INPUT "Input a temperature (in farenheit): ", faren_input
+PRINT "Celsius: "; faren_to_celsius(faren_input)
+INPUT "Input a temperature (in celsius): ", celsius_input
+PRINT "farenheit: "; celsius_to_faren(celsius_input)
+end
+
+
+
