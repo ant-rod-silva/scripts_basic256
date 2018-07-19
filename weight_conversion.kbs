@@ -1,0 +1,31 @@
+# program to input weight in Kg and convert it into gram, Pound, Ton
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# If radius = 12 -> area = 452.2893... | circunference = 75,3982...
+# If area = 379,94 | radius = 10,99...
+
+#  kilogram to gram conversion
+function kg_to_gram(w)
+    return w * 1000
+end function
+
+#  kilogram to ton conversion
+function kg_to_ton(w)
+    return w / 1000
+end function
+
+#  kilogram to pounds conversion
+function kg_to_pounds(w)
+    return w * 2.205
+end function
+
+# main
+cls
+INPUT "Enter the weight (in kg): ", kg_input
+PRINT " Grams = "; kg_to_gram(kg_input)
+PRINT " Pounds = "; kg_to_pounds(kg_input)
+PRINT " Tons = "; kg_to_ton(kg_input)
+END
+
+
+
