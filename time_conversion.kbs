@@ -1,0 +1,24 @@
+# Program to Input seconds and convert into hours minutes and seconds
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# Input seconds: 3600 | Celsius: 1 HOURS, 0 MINUTES, 0 SECONDS
+
+
+subroutine convert_seconds(sec)
+    H = sec \ 3600
+    MI = sec % 3600
+    M = MI \ 60
+    S = MI % 60
+    PRINT H; " HOURS, "; M; " MINUTES, ";  S; " SECONDS"
+end subroutine
+
+
+# main
+cls
+INPUT "Input seconds: ", second_input
+PRINT "Celsius: "; 
+call convert_seconds(second_input)
+end
+
+
+
