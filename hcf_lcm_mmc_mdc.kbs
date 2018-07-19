@@ -1,0 +1,57 @@
+# HCF and LCM calculator
+# By Antonio Rodrigo dos Santos Silva (2018)
+
+# Highest common factor (HCF) - MDC (Maximo Divisor Comum)
+# Here are the list of prime factors of 24 and 36:
+# 24 = 2 x 2 x 2 x 3 (2^3 * 3^1)
+# 36 = 2 x 2 x 3 x 3 (2^2 * 3^2)
+# The [common factors] with [smallest exponent]: 2^2 and 3^1
+# HCF is: 2 x 2 x 3 = 12
+
+function HCF (num1, num2)
+    first_num = 0
+    sec_num = 0
+ 
+    if num1<num2 then
+        first_num = num1 	 
+        sec_num = num2
+    else	 
+        first_num = num2
+        secnum = num1
+    end if
+
+    r = sec_num % first_num
+    while r > 0
+        sec_num = first_num
+        first_num = r
+        r = sec_num % first_num
+    end while
+
+    hcf_result = first_num
+    return hcf_result
+end function
+
+# Lowest common multiple (LCM) - Mínimo Múltiplo Comum (MMC)
+# 24 = 2 x 2 x 2 x 3 (2^3 * 3^1)
+# 36 = 2 x 2 x 3 x 3 (2^2 * 3^2)
+# The [commom] and [not common factors] with [biggest exponents] - 2^3 and 3^2
+# So the LCM is (2 x 2 x 2) x (3 x 3) = 72.
+
+function LCM (A, B)
+    C = A
+    D = B
+    while A % B <> 0
+        R = A % B
+        A = B
+        B = R
+    end while
+    return (C * D) / B
+end function
+
+# main app
+CLS
+INPUT "Enter first number: ", n1
+INPUT "Enter second number: ", n2
+PRINT "HCF: "; HCF(n1, n2)
+PRINT "LCM: "; LCM(n1, n2)
+END
