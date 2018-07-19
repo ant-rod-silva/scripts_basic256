@@ -1,0 +1,22 @@
+# program to print all the odd numbers from an interval
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# odd_numbers(1,100) -> 1, 3, 4, ..., 99
+
+subroutine odd_numbers(start_interval$, end_interval$)
+    if start_interval$ < end_interval$ then
+        FOR i$ = start_interval$ TO end_interval$
+            IF i$ % 2 = 1 THEN
+                PRINT i$
+            END IF
+        NEXT i$
+    end if
+end subroutine
+
+# main
+cls
+call odd_numbers(1,100)
+end
+
+
+
