@@ -1,0 +1,24 @@
+#  program to input any number and print the summation of digits 
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# Input a number: 123 | Sum of digit is: 6 (1 + 2 + 3)
+
+function summation_of_digits(n$)
+    r$ = 0
+    s$ = 0
+    while n$ <> 0
+        r$ = n$ % 10
+        s$ = s$ + r$
+        n$ = INT(n$/10)
+    end while
+    return s$
+end function
+
+# main
+cls
+INPUT "Input a number: ", number_input$
+PRINT "Sum of digit is: "; summation_of_digits(number_input$)
+end
+
+
+
