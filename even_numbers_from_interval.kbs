@@ -1,0 +1,22 @@
+# program to print all the even number from an interval
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# even_numbers(1,100) -> 2, 4, 6, ..., 100
+
+subroutine even_numbers(start_interval$, end_interval$)
+    if start_interval$ < end_interval$ then
+        FOR i$ = start_interval$ TO end_interval$
+            IF i$ % 2 = 0 THEN
+                PRINT i$
+            END IF
+        NEXT i$
+    end if
+end subroutine
+
+# main
+cls
+call even_numbers(1,100)
+end
+
+
+
