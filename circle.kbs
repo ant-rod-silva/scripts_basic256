@@ -1,0 +1,32 @@
+# program to compute the area and circumference of a circle
+# By Antonio Rodrigo dos Santos Silva (2018)
+# Test:
+# If radius = 12 -> area = 452.2893... | circunference = 75,3982...
+# If area = 379,94 | radius = 10,99...
+
+#  calculates the circle area
+function circle_area(r)
+    return pi*(r^2)
+end function
+
+#  calculates the circle radius
+function circle_radius(a)
+    return sqr(a / pi)
+end function
+
+#  calculates the circle circunference
+function circle_circunference(r)
+    return 2*pi*r
+end function
+
+# main
+cls
+input "Input the radius value: ",radius_input
+print " the area is: ";circle_area(radius_input)
+print " the circunference is: ";circle_circunference(radius_input)
+
+input "Input the circle area: ",area_input
+print " the radius is: ";circle_radius(area_input)
+
+
+
