@@ -1,0 +1,19 @@
+# Write a program to input the length ,width, and high of wall 
+# then compute the number of bricks in wall ,
+# fthe brick sides is (24 x 8 x 12cm).
+# By Antonio Rodrigo dos Santos Silva (2018)
+
+function number_bricks_from_wall(l,w,h)
+    brick_length = 24
+    brick_width = 8
+    brick_high = 12
+    v = l * w * h
+    return int (v/(brick_length * brick_width * brick_high))
+end function
+
+# main app
+input "the wall length: ", wall_l
+input "the wall width: ", wall_w
+input "the wall high: ", wall_h
+print "There are ";number_bricks_from_wall(wall_l,wall_w,wall_h);" bricks in the wall"
+end
