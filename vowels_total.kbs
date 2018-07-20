@@ -1,0 +1,19 @@
+# App to count total number of vowels in a word
+# Author: Antonio Rodrigo dos Santos Silva (2018)
+
+function total_vowels(wrd)
+    total$ = 0
+    wrd = upper(wrd)                                                     
+    FOR i = 1 TO length(wrd)
+        letter = MID(wrd, i, 1)                                          
+        IF letter = "A" OR letter = "E" OR letter = "I" OR letter = "O" OR letter = "U" THEN
+            total$ = total$ + 1
+        END IF
+    NEXT i   
+    return total$ 
+end function
+
+# main app
+INPUT "Input a word: ", wrd_input
+print "Total number of vowels: "; total_vowels(wrd_input)
+end
