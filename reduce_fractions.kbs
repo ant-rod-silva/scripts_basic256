@@ -1,0 +1,32 @@
+# reduce fraction
+# Author: Antonio Rodrigo dos Santos Silva (2018)
+# Based in srvaldez gcd logic  (thanks) - https://freebasic.net/forum/memberlist.php?mode=viewprofile&u=441
+
+# suppose you have the fraction 42/56, gcd(42,56) = 14
+# 42/14=3
+# 56/14=4
+# fraction = 3/4
+# another examples: 23/46 = 1/2 , 45/180 = 1/4
+
+#  máximo divisor comum (mdc) entre a e b.
+function gcd(a,b)
+    t = 0
+    while a <> 0
+        t = a
+        a = b % a
+        b = t
+    end while
+    return b
+end function
+
+# main app
+cls
+INPUT "Input number (n1): ", n1
+INPUT "Input number (n2): ", n2
+print ""
+print "fraction: "; int(n1); "/"; int(n2)
+my_gcd = gcd(n1,n2)
+print ""
+print "GCD ("; n1;",";n2;"): ";my_gcd
+print "reduced fraction: "; int(n1/my_gcd); "/"; int(n2/my_gcd)
+end
