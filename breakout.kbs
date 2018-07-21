@@ -1,0 +1,400 @@
+# BRICK - STRIKE N DESTROY
+# Basic Breakout-type Game
+# By Antonio Rodrigo dos Santos Silva (2018)
+
+# --------------------------------------------------------------------- #
+# VARIABLES                                                       #
+# --------------------------------------------------------------------- #
+
+# brick vars
+global totalCols
+global totalRows
+global brickHeight
+global brickWidth
+global brickDistanceBetween
+global brickrow
+global brickrow_x
+global brickrow_y
+
+# paddle vars
+global paddle
+global paddle_height
+global paddle_width
+global paddle_pos_x
+global paddle_pos_y
+global paddle_move
+
+# ball vars
+global ball_pos_x
+global ball_pos_y
+global ball_height
+global ball_width
+global ball_move
+
+# move_id = 1 -> left, top
+# move_id = 2 -> right, top
+# move_id = 3 -> left, button
+# move_id = 4 -> right, button
+global move_id
+
+# keys vars
+global keySpace$
+global keyEsc$
+global ar_left
+global ar_right
+global color_orange
+global color_black
+
+keySpace$ = 32
+keyEsc$ = 16777216
+ar_left=16777234
+ar_right=16777236
+color_orange = 4294927872
+color_black = 4278190080
+
+# screen vars
+global screenWidth
+global screenHeight
+global bg_color1
+bg_color1 = gray
+
+# game  vars
+global fim_jogo
+global score
+
+# --------------------------------------------------------------------- #
+# SUBROUTINES                                                  #
+# --------------------------------------------------------------------- #
+
+# called when ESC key is pressed
+subroutine endGame()
+    cls
+    print "Exiting..."
+    END
+end subroutine
+
+subroutine clearVars()
+    ball_pos_x = 200
+    ball_pos_y = 120
+end subroutine
+
+subroutine initialValues()
+    score = 0 
+
+    # ball vars
+    ball_move = 10
+    ball_height = 20
+    ball_width = 20
+    move_id = 4 # right, button
+
+    # bricks vars
+    totalCols = 15
+    totalRows = 4
+
+    # number of bricks & layers (lines, columns)
+    dim brickrow(totalRows, totalCols)
+    dim brickrow_x(totalRows, totalCols)
+    dim brickrow_y(totalRows, totalCols)
+
+    brickHeight = 20
+    brickWidth = 20
+    brickDistanceBetween = 0
+
+    screenWidth = totalCols * brickWidth
+    screenHeight = 380
+    
+    # paddle vars
+    paddle_height = 20
+    paddle_width = 90
+    paddle_pos_x = 0
+    paddle_pos_y = 330
+    paddle_move = 40
+
+    fim_jogo = false
+end subroutine
+
+subroutine fillBricks()
+    for i = 0 to (totalRows -1)
+        for j = 0 to (totalCols -1)
+            brickrow[i, j] = 1
+            brickrow_x[i, j] = 0
+            brickrow_y[i, j] = 0
+        next j
+    next i
+end subroutine
+
+subroutine repaintStage()
+    color bg_color1
+    # rect x_position, y_position, width, height
+    rect 0, 0, screenWidth, screenHeight
+end subroutine
+
+#draw paddle
+subroutine repaintPaddle()
+    penwidth 1
+    color darkred, yellow
+    rect paddle_pos_x, paddle_pos_y, paddle_width, paddle_height
+end subroutine
+
+#draw paddle
+subroutine repaintBall()
+    penwidth 1
+    color darkred, white
+    rect ball_pos_x, ball_pos_y, ball_width, ball_height
+end subroutine
+
+# shows the game header
+subroutine printGameHeader()
+    print " ***************************************************"
+    print " **      B R I C K  -  S T R I K E   N   D E S T R O Y          **"
+    print " ***************************************************"
+end subroutine
+
+# shows score
+subroutine printScore()
+    print " >> Score: "; score
+end subroutine
+
+# shows a message with the score when all bricks are damaged
+subroutine printWinnerMessage()
+    print " ** WE HAVE A WINNER !! **"
+    call printScore()
+end subroutine
+
+# shows a message wihen player lost
+subroutine printLoseMessage()
+    print " ** You Lose the match :( **"
+    call printScore()
+end subroutine
+
+subroutine you_died()
+    cls
+    call printGameHeader()
+    call printLoseMessage()
+    # special effect
+    color blue
+    for i = 5 to 35
+        circle ball_pos_x,ball_pos_y,i*2
+        pause 0.005
+        refresh
+    next i
+end subroutine
+
+#draw ball
+subroutine update_ball_position()
+    # top, left
+    if move_id = 1 then
+        ball_pos_x = ball_pos_x - ball_move
+        ball_pos_y = ball_pos_y - ball_move
+    end if
+    # top, right
+    if move_id = 2 then
+        ball_pos_x = ball_pos_x + ball_move
+        ball_pos_y = ball_pos_y - ball_move
+    end if
+    # bottom, left
+    if move_id = 3 then
+        ball_pos_x = ball_pos_x - ball_move
+        ball_pos_y = ball_pos_y + ball_move
+    end if
+    # bottom, right
+    if move_id = 4 then
+        ball_pos_x = ball_pos_x + ball_move
+        ball_pos_y = ball_pos_y + ball_move
+    end if
+ 
+    # wall collision    
+    if ball_pos_y >= (screenHeight - ball_height) then 
+        if move_id = 4 then
+            move_id = 2
+        end if
+        if move_id = 3 then
+            move_id = 1
+        end if
+    end if
+
+    if ball_pos_x = 0 then
+        if move_id = 3 then
+            move_id = 4
+        end if
+        if move_id = 1 then
+            move_id = 2
+        end if
+    end if
+
+    if ball_pos_x >= (screenWidth - ball_width) then
+        if move_id = 2 then
+            move_id = 1
+        end if
+        if move_id = 4 then
+            move_id = 3
+        end if
+    end if
+
+    if ball_pos_y = 0 then
+        if move_id = 1 then
+            move_id = 3
+        end if
+        if move_id = 2 then
+            move_id = 4
+        end if
+    end if
+
+    # tocou no chao (game over)
+    if ball_pos_y + ball_height >= graphheight then 
+         call you_died()
+         pause 2
+         end
+    end if
+
+    # PADDLE collision
+    paddle_touched = false
+
+    if ball_pos_y = paddle_pos_y - ball_height then
+        # ball touched right 
+        if ball_pos_x = (paddle_pos_x + paddle_width) then
+            if move_id = 3 or move_id = 2  then move_id = 2
+            paddle_touched = true
+        end if
+
+        # ball touched left
+        if paddle_touched = false then
+            if ball_pos_x = (paddle_pos_x - ball_width) then
+                if move_id = 3 or move_id = 2 then move_id = 1
+                paddle_touched = true
+            end if
+        end if
+
+        if paddle_touched = false then
+            if ball_pos_x >= paddle_pos_x and ball_pos_x <= (paddle_pos_x + paddle_width) then
+                if move_id = 3 then move_id = 1
+                if move_id = 4 then move_id = 2
+            end if
+        end if
+    end if 
+    
+    # brick collision
+    for i = 0 to (totalRows - 1)
+        for j = 0 to (totalCols - 1)
+            if ball_pos_x = brickrow_x[i, j] and ball_pos_y = brickrow_y[i, j] then
+                brickrow[i, j] = 0
+                score = score + 1
+            end if
+        next j
+    next i
+
+end subroutine
+
+
+# Paint the game sceen (stage + bricks)
+subroutine repaintStageAndBricks()
+    call printGameHeader()
+    call printScore()
+
+    fim_jogo = false
+
+    # draw the stage
+    call repaintStage()
+
+    # draw bricks on top
+    for i = 0 to (totalRows - 1)
+        for j = 0 to (totalCols - 1)
+            #  calculates brick x position
+            if j = 0 then
+                brick_x = 0
+            else
+                brick_x = brick_x + (brickWidth + brickDistanceBetween)
+            end if
+            brickrow_x[i, j] = brick_x
+
+            # calculates brick y position
+            if i = 0 then
+                brick_y = 0
+            else
+                brick_y = (brickHeight + brickDistanceBetween) * i
+            end if
+            brickrow_y[i, j] = brick_y
+
+           # draw a unique brick (normal)
+            if brickrow[i, j] = 1 then
+                color darkred, orange
+            end if
+            # draw a unique brick (destroyed)
+            if brickrow[i, j] = 0 then
+                color gray, gray
+            endif
+            penwidth 1
+            rect brick_x, brick_y, brickWidth, brickHeight
+         next j
+    next i
+
+    if fim_jogo = true then 
+        cls
+        call printGameHeader()
+        call printWinnerMessage()
+        end
+    endif
+end subroutine
+
+# --------------------------------------------------------------------- #
+# GAME STARTS HE                                              #
+# --------------------------------------------------------------------- #
+
+# screen 1 - intro
+
+cls
+call printGameHeader()
+print " **                        press [space] to start                       **"
+
+do
+    tecla$ = key
+    pause .01
+    validKeypressed$ = 0
+    if tecla$ = keySpace$ or tecla$ = keyEsc$ then
+        validKeypressed$ = 1
+    end if
+until validKeypressed$ = 1
+
+if tecla$ = keyEsc$ then
+    call endGame()
+end if
+
+# screen 2 - game
+cls
+call initialValues()
+call clearVars()
+call fillBricks()
+
+graphsize screenWidth, screenHeight
+graphvisible(1)
+editvisible(0)
+outputvisible(1)
+fastgraphics
+
+while not keypressed(keyEsc$)
+    pause .01
+        
+    # draw the game screen and bricks
+    call repaintStageAndBricks()
+
+    # draw paddle
+    call repaintPaddle()
+        
+    # draw ball
+    call update_ball_position()
+    call repaintBall()
+    refresh
+
+    # paddle movement with arrows
+    if keypressed(ar_right) then
+        if paddle_pos_x + paddle_width < graphwidth then
+            paddle_pos_x = paddle_pos_x + paddle_move
+        end if
+    end if
+    if keypressed(ar_left) then
+        if paddle_pos_x > 0 then
+            paddle_pos_x = paddle_pos_x - paddle_move
+        end if
+    end if
+
+end while
