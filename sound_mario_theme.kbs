@@ -1,0 +1,108 @@
+# Mario theme
+# Antonio Rodrigo dos Santos Silva (2018)
+# based in https://wiki.mikrotik.com/wiki/Super_Mario_Theme
+
+
+subroutine generateTone(frequency, len, delay_time)
+    sound{frequency,len}
+    pause delay_time
+end subroutine
+
+# part 1
+call generateTone(660,100, 0.050)
+call generateTone(660,100, 0.200)
+call generateTone(660,100, 0.200)
+call generateTone(510,100, 0.050)
+call generateTone(660,100, 0.200)
+call generateTone(770,100, 0.450)
+call generateTone(380,100, 0.475)
+
+# part 2, part 3
+for i = 1 to 2
+    call generateTone(510,100, 0.350)
+    call generateTone(380,100, 0.300)
+    call generateTone(320,100, 0.400)
+    call generateTone(440,100, 0.200)
+    call generateTone(480,80, 0.230)
+    call generateTone(450,100, 0.050)
+    call generateTone(430,100, 0.200)
+    call generateTone(380,100, 0.100)
+    call generateTone(660,80, 0.100)
+    call generateTone(760,50, 0.050)
+    call generateTone(860,100, 0.200)
+    call generateTone(700,80, 0.050)
+    call generateTone(760,50, 0.250)
+    call generateTone(660,80, 0.200)
+    call generateTone(520,80, 0.050)
+    call generateTone(580,80, 0.050)
+    call generateTone(480,80, 0.400)
+next i
+
+for i = 1 to 2
+    call generateTone(500,80, 0.200)
+    call generateTone(760,100, 0.050)
+    call generateTone(720,100, 0.050)
+    call generateTone(680,100, 0.050)
+    call generateTone(620,150, 0.200)
+    call generateTone(650,150, 0.200)
+    call generateTone(380,100, 0.050)
+    call generateTone(430,100, 0.050)
+    call generateTone(500,100, 0.200)
+    call generateTone(430,100, 0.050)
+    call generateTone(500,100, 0.050)
+    call generateTone(570,100, 0.120)
+    call generateTone(500,100, 0.200)
+
+    call generateTone(760,100, 0.050)
+    call generateTone(720,100, 0.050)
+    call generateTone(680,100, 0.050)
+    call generateTone(620,150, 0.200)
+    call generateTone(650,200, 0.200)
+
+    call generateTone(1020,80, 0.200)
+    call generateTone(1020,80, 0.050)
+    call generateTone(1020,80, 0.200)
+
+    call generateTone(380,100, 0.200)
+next i
+
+call generateTone(500,60, 0.050)
+call generateTone(500,80, 0.200)
+call generateTone(500,60, 0.250)
+call generateTone(500,80, 0.050)
+call generateTone(580,80, 0.050)
+call generateTone(580,80, 0.250)
+call generateTone(660,80, 0.050)
+call generateTone(500,80, 0.200)
+call generateTone(430,80, 0.050)
+call generateTone(380,80, 0.500)
+
+call generateTone(500,60, 0.050)
+call generateTone(500,80, 0.200)
+call generateTone(500,60, 0.250)
+call generateTone(500,80, 0.050)
+call generateTone(580,80, 0.050)
+call generateTone(600,80, 0.450)
+
+call generateTone(870,80, 0.225)
+call generateTone(760,80, 0.500)
+
+call generateTone(500,60, 0.050)
+call generateTone(500,80, 0.200)
+call generateTone(500,60, 0.250)
+call generateTone(500,80, 0.050)
+call generateTone(580,80, 0.250)
+call generateTone(660,80, 0.050)
+call generateTone(500,80, 0.200)
+call generateTone(430,80, 0.050)
+call generateTone(380,80, 0.050)
+
+call generateTone(660,100, 0.050)
+call generateTone(660,100, 0.200)
+call generateTone(660,100, 0.300)
+call generateTone(510,100, 0.050)
+call generateTone(660,100, 0.200)
+call generateTone(770,100, 0.450)
+call generateTone(380,100, 0.475)
+
+end
