@@ -1,0 +1,91 @@
+# Rock, Paper, Scissors
+# By Antonio Rodrigo dos Santos Silva (2018)
+
+p_key$ = 80
+r_key$ = 82
+s_key$ = 83	
+tecla$ = 0
+userchoice = ""
+compchoice = ""
+validKeypressed$ = false
+
+function printObjectName(opt)
+    name = ""
+    if opt = "r" then name = "Rock"
+    if opt = "p" then name = "Paper"
+    if opt = "s" then name = "Scissors"
+    return name
+end function
+
+cls
+
+#choose your technique
+print "[R]ock, [P]aper or [S]cissors? Choose one:  "
+
+do
+    tecla$ = key
+    pause .01
+    validKeypressed$ = false
+    if tecla$ = p_key$ or tecla$ = r_key$ or tecla$ = s_key$ then
+        validKeypressed$ = true
+    end if
+until validKeypressed$ = true
+
+if tecla$ = r_key$ then
+    userchoice = "r"
+end if
+if tecla$ = p_key$ then
+    userchoice = "p"
+end if
+if tecla$ = s_key$ then
+    userchoice = "s"
+end if
+
+# 0, 1, 2
+compchoice_rand = int(rand * 5)
+if compchoice_rand = 0  or compchoice_rand = 2  then
+    compchoice = "r"
+end if
+if compchoice_rand = 1 or compchoice_rand = 4  then
+    compchoice = "p"
+end if
+if compchoice_rand = 3 or compchoice_rand = 5 then
+    compchoice = "s"
+end if
+
+#the computers choice is shown
+print "User choosed: "; printObjectName(userchoice)
+print "Computer choosed: "; printObjectName(compchoice)
+
+#the winner is decided and displayed
+if compchoice = userchoice then 
+    print "Draw"
+    end
+end if
+
+
+if userchoice = "r" then
+    if compchoice = "s" then
+        print "You Win"
+    else
+        print "You Lose"
+    end if
+end if
+
+if userchoice = "s" then
+    if compchoice = "p" then
+        print "You Win"
+    else
+        print "You Lose"
+    end if
+end if
+
+if userchoice = "p" then
+    if compchoice = "r" then
+        print "You Win"
+    else
+        print "You Lose"
+    end if
+end if
+
+
